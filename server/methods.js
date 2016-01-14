@@ -33,7 +33,7 @@ Meteor.methods({
 				let message = syncSlackPostMessage(
 					credentials.access_token,
 					credentials.incoming_webhook.channel,
-					'Howdy! Ready to watch <Startupfood! :ok_hand:',
+					'Howdy! Ready to watch <https://www.youtube.com/user/Startupfood|Startupfood>! :ok_hand:',
 					{
 						username: "TheFamily",
 						as_user: false,
