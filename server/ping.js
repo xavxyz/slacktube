@@ -1,3 +1,4 @@
+/*
 Meteor.setInterval(function() {
 	HTTP.get(Meteor.absoluteUrl(), function(err,res) {
 		console.log('pinged site');
@@ -8,4 +9,5 @@ Meteor.setInterval(function() {
 			Meteor.call('sendToSlack', res);
 		}
 	});
-}, 1000); // every 5 minutes (300000)
+}, 60000); // every 5 minutes (300000)
+*/
