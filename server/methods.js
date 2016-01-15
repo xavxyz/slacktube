@@ -47,7 +47,7 @@ Meteor.methods({
 					teamName: credentials.team_name,
 					channel: credentials.incoming_webhook.channel,
 					messages: [
-						{ postId: 'first_message', ts: message.ts }
+						{ postId: 'first_message', ts: 0 }
 					]
 				});
 
