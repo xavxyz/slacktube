@@ -1,3 +1,5 @@
+// slack api from khamoud:slack-api updated to support attachments in message
+
 Future = Npm.require('fibers/future');
 SlackAPI = {
 

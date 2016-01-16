@@ -1,11 +1,11 @@
 Meteor.methods({
 	pingYoutube: function() {
 		let youtubeData = Youtube.fetchStartupfood(1),
-				lastVideoUploaded = youtubeData.items[0].snippet,
-				totalVideosResults = youtubeData.pageInfo.totalResults;
+			lastVideoUploaded = youtubeData.items[0].snippet,
+			totalVideosResults = youtubeData.pageInfo.totalResults;
 
 		let videosRegistered = Startupfood.find({}, {sort: {publishedAt: 1}}).fetch(),
-				lastVideoRegistered = videosRegistered[0];
+			lastVideoRegistered = videosRegistered[0];
 
 		// the collection is empty or a new video has been uploaded, insert the last video uploaded on startupfood
 		if (videosRegistered.length === 0 || Date.parse(lastVideoUploaded.publishedAt) > lastVideoRegistered.publishedAt) {
@@ -25,7 +25,7 @@ Meteor.methods({
 	requestSlackToken: function(code) {
 		try {
 			let syncSlackOAuth = Meteor.wrapAsync(SlackAPI.oauth.access),
-					syncSlackPostMessage = Meteor.wrapAsync(SlackAPI.chat.postMessage);
+				syncSlackPostMessage = Meteor.wrapAsync(SlackAPI.chat.postMessage);
 
 			let credentials = syncSlackOAuth(Meteor.settings.public.clientId, Meteor.settings.private.clientSecret, code, Meteor.absoluteUrl());
 
@@ -63,9 +63,9 @@ Meteor.methods({
 	sendToSlack: function(video) {
 
 		let teams = Slackteams.find({}).fetch(),
-				botName = "TheFamily",
-				botIcon = "https://yt3.ggpht.com/-OHMegElwYDQ/AAAAAAAAAAI/AAAAAAAAAAA/Z0W66g-RchI/s100-c-k-no/photo.jpg",
-				syncSlackPostMessage = Meteor.wrapAsync(SlackAPI.chat.postMessage);
+			botName = "TheFamily",
+			botIcon = "https://yt3.ggpht.com/-OHMegElwYDQ/AAAAAAAAAAI/AAAAAAAAAAA/Z0W66g-RchI/s100-c-k-no/photo.jpg",
+			syncSlackPostMessage = Meteor.wrapAsync(SlackAPI.chat.postMessage);
 
 		_.each(teams, function(team) {
 			console.log('posting to channel '+ team.channel);
@@ -99,12 +99,12 @@ Meteor.methods({
 										"short": true
 									}
 									/*
-									{
-										"title": ":point_down: SUBSCRIBE :point_down:",
-										"value": "<https://thefamily.typeform.com/to/VyzBPR|FREE ENTREPRENEUR SCHOOL>",
-										"short": true
-									}
-									*/
+									 {
+									 "title": ":point_down: SUBSCRIBE :point_down:",
+									 "value": "<https://thefamily.typeform.com/to/VyzBPR|FREE ENTREPRENEUR SCHOOL>",
+									 "short": true
+									 }
+									 */
 								],
 								"color": "#10102A",
 							},
@@ -115,15 +115,14 @@ Meteor.methods({
 					}
 				);
 
+				team.messages.push({
+					video: video.youtubeId,
+					ts: result.ts
+				});
 
-			 team.messages.push({
-			 postId: post._id,
-			 ts: result.ts
-			 });
-
-			 Slackteams.update({accessToken: team.accessToken}, {$set: {messages: team.messages}}, function(err, res) {
-			 console.log('logged post '+ post._id +' sent to '+ result.channel +' at '+ result.ts);
-			 });
+				Slackteams.update({accessToken: team.accessToken}, {$set: {messages: team.messages}}, function(err, res) {
+					console.log('logged post '+ post._id +' sent to '+ result.channel +' at '+ result.ts);
+				});
 
 			} catch(error) {
 				if (!error.ok && error.error === 'token_revoked') {
