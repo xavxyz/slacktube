@@ -29,7 +29,7 @@ Meteor.methods({
 			let syncSlackOAuth = Meteor.wrapAsync(SlackAPI.oauth.access),
 				syncSlackPostMessage = Meteor.wrapAsync(SlackAPI.chat.postMessage);
 
-			let credentials = syncSlackOAuth(Meteor.settings.public.clientId, Meteor.settings.private.clientSecret, code, Meteor.absoluteUrl());
+			let credentials = syncSlackOAuth(Meteor.settings.public.clientId, Meteor.settings.private.clientSecret, code, '');
 
 			try {
 				let message = syncSlackPostMessage(
@@ -49,7 +49,7 @@ Meteor.methods({
 					teamName: credentials.team_name,
 					channel: credentials.incoming_webhook.channel,
 					messages: [
-						{ postId: 'first_message', ts: 0 }
+						{ videoId: 'first_message', ts: message.ts }
 					]
 				});
 
