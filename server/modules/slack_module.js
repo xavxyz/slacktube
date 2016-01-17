@@ -1,10 +1,8 @@
 Slack = {};
 
-Slack.sendToChannel = function(video) {
+Slack.sendToTeams = function(video) {
 
 	let teams = Slackteams.find({}).fetch(),
-			botName = "TheFamily",
-			botIcon = "https://yt3.ggpht.com/-OHMegElwYDQ/AAAAAAAAAAI/AAAAAAAAAAA/Z0W66g-RchI/s100-c-k-no/photo.jpg",
 			syncSlackPostMessage = Meteor.wrapAsync(SlackAPI.chat.postMessage);
 
 	_.each(teams, function(team) {
@@ -15,7 +13,7 @@ Slack.sendToChannel = function(video) {
 				team.channel,
 				":coffee::wave: Direct link of our newest video: https://www.youtube.com/watch?v="+ video.youtubeId+" :heart::tv:",
 				{
-					username: botName,
+					username: Meteor.settings.public.botName,
 					as_user: false,
 					// attachment to complete the video message
 					attachments: [
@@ -44,19 +42,19 @@ Slack.sendToChannel = function(video) {
 					],
 					unfurl_text: false,
 					unfurl_media: true, // allow the the embed video to be shown (cf. direct link to youtube video)
-					icon_url: botIcon
+					icon_url: Meteor.settings.public.botIcon
 				}
 			);
 
 			// log content send to the team
 			team.messages.push({
-				video: video.youtubeId,
+				videoId: video.youtubeId,
 				ts: result.ts
 			});
 
 			// update the collection
 			Slackteams.update({accessToken: team.accessToken}, {$set: {messages: team.messages}}, function(err, res) {
-				console.log('logged post '+ post._id +' sent to '+ result.channel +' at '+ result.ts);
+				console.log('logged post '+ video.youtubeId +' sent to '+ result.channel +' at '+ result.ts);
 			});
 
 		} catch(error) {
@@ -67,4 +65,4 @@ Slack.sendToChannel = function(video) {
 			}
 		}
 	});
-}
+};
