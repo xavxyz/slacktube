@@ -1,5 +1,5 @@
 # meteor-startupfood-slack
-Connect TheFamily's Youtube channel to Slack teams via the Add To Slack button.
+Connect TheFamily's Youtube channel to Slack teams via the Add To Slack button or simple link in an email ;)
 * [TheFamily Youtube channel](https://www.youtube.com/user/Startupfood)
 * [Add to Slack Button docs](https://api.slack.com/docs/slack-button)
 
@@ -21,15 +21,18 @@ Connect TheFamily's Youtube channel to Slack teams via the Add To Slack button.
   }
 }
 ```
-5. Deploy your app :)
 
-That's all, you are ready to push contents to any teams connected to your app.
+That's all, deploy your app & you are ready to push contents to any teams connected to your app.
 
 # Basic enhancements
 You can customize the attachments in `/server/lib/slack_module.js`.
 You may read the [Slack attachments doc](https://api.slack.com/docs/attachments) to better understand how to deal with it.
 
 # Where to lead this app next
+* Check whether the app is connected to a channel or an user. If it's an user, use Slack's API method to post in user (for ex: slackbot)
 * Add metrics tracking to the links by passing through the app and then redirect to Youtube or wherever you need to lead the user.
 * Add search slash command/slackbot to search directly in your Youtube channel or in TheFamily TV directory (tv.thefamily.co).
 * Push other content than videos if the user really use this app.
+
+# Contributions
+Do not hesitate to open issues, PR or even to hire me ;) 
