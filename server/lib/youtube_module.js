@@ -1,5 +1,6 @@
 Youtube = {};
 
+// ping playlistId corresponding to Startupfood and get back @maxResults parsed result
 Youtube.fetchStartupfood = function(maxResults) {
 	try {
 		let syncGet = Meteor.wrapAsync(HTTP.get);
@@ -20,6 +21,7 @@ Youtube.fetchStartupfood = function(maxResults) {
 	}
 };
 
+// insert the document video in the collection
 Youtube.insertNewVideo = function(videoFromYoutube) {
 	Startupfood.insert({
 		title: videoFromYoutube.title,

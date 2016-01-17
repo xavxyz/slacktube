@@ -1,0 +1,11 @@
+{
+  "public": {
+    "clientId": "YOUR_SLACK_APP_CLIENT_ID",
+    "botName": "YOUR_BOT_NAME",
+    "botIcon": "YOUR_BOT_ICON"
+  },
+  "private": {
+    "clientSecret": "YOUR_SLACK_APP_CLIENT_SECRET",
+    "googleApiKey": "YOUR_GOOGLE_API_KEY"
+  }
+}
