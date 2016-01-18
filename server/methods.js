@@ -5,10 +5,10 @@ Meteor.methods({
 			totalVideosResults = youtubeData.pageInfo.totalResults;
 
 		let videosRegistered = Startupfood.find({}, {sort: {publishedAt: 1}}).fetch(),
-			lastVideoRegistered = videosRegistered[0];
+				lastVideoRegistered = videosRegistered[0];
 
 		// the collection is empty or a new video has been uploaded, do the maths
-		if (videosRegistered.length === 0 || Date.parse(lastVideoUploaded.publishedAt) > lastVideoRegistered.publishedAt) {
+		if (videosRegistered.length === 0 || Date.parse(lastVideoUploaded.publishedAt) > Date.parse(lastVideoRegistered.publishedAt)) {
 			// log a new video document in the collection
 			Youtube.insertNewVideo(lastVideoUploaded);
 
