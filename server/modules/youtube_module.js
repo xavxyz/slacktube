@@ -20,7 +20,6 @@ Youtube.fetchUploads = () => {
 		_.each(activities, (activity) => {
 			if (activity !== undefined && activity.snippet !== undefined && activity.snippet.type === "upload") {
 				videos.push(activity.snippet);
-				console.log(videos);
 			}
 		});
 
