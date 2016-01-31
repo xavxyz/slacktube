@@ -22,15 +22,10 @@ Slack.sendToTeams = function(video) {
 							"title": "Become a better entrepreneur watching TheFamily's videos on YouTube ! :muscle: :tv:",
 							"title_link": "https://www.youtube.com/user/Startupfood",
 							// push any special content there
-							"text": "This new video "+ video.title +" is about:\n"+ video.description,
+							"text": ":question: About this new video:\n"+ video.description,
 							"image_url": "http://static1.squarespace.com/static/54c94daae4b0f2976a2f5ee8/t/55a681d9e4b06c464d359cc0/1436975585059/?format=1000w",
 							// you can specify as much as you want attachments
 							"fields": [
-								{
-									"title": "Online videos",
-									"value": video.totalVideosResults +" :tv:",
-									"short": true
-								},
 								{
 									"title": "Want more? :rocket:",
 									"value": "<http://www.koudetatondemand.co/|Watch KOUDETAT for free! :tada:>",
