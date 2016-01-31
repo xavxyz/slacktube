@@ -2,26 +2,23 @@ Meteor.methods({
 	pingYoutube: function() {
 		// do all stuff
 		if (Meteor.isServer) {
-			let youtubeData = Youtube.fetchStartupfood(1),
-				lastVideoUploaded = youtubeData.items[0].snippet, // check youtube api docs for more infos about that
-				totalVideosResults = youtubeData.pageInfo.totalResults;
+			let videosUploaded = Youtube.fetchUploads(10),
+					lastVideoUploaded = Youtube.refactorVideosData(videosUploaded[0]);
 
-			let videosRegistered = Startupfood.find({}, {sort: {publishedAt: 1}}).fetch(),
+			let videosRegistered = Startupfood.find({}, {sort: {publishedAt: -1}}).fetch(),
 					lastVideoRegistered = videosRegistered[0];
 
-			// the collection is empty or a new video has been uploaded, do the maths
-			if (videosRegistered.length === 0 || Date.parse(lastVideoUploaded.publishedAt) > Date.parse(lastVideoRegistered.publishedAt)) {
+			if ( videosRegistered.length === 0 || lastVideoUploaded.publishedAt > lastVideoRegistered.publishedAt) {
 				// log a new video document in the collection
 				Youtube.insertNewVideo(lastVideoUploaded);
 
 				// send to each team connected the new video
 				Slack.sendToTeams({
 					title: lastVideoUploaded.title,
-					youtubeId: lastVideoUploaded.resourceId.videoId,
-					totalVideosResults: totalVideosResults,
+					youtubeId: lastVideoUploaded.youtubeId,
+//					totalVideosResults: totalVideosResults,
 					description: lastVideoUploaded.description
 				});
-
 			} else {
 				console.log('no new video uploaded yet!');
 			}
@@ -38,7 +35,7 @@ Meteor.methods({
 				let message = syncSlackPostMessage(
 					credentials.access_token,
 					credentials.incoming_webhook.channel,
-					'Howdy! Ready to watch <https://www.youtube.com/user/Startupfood|Startupfood>! :ok_hand:',
+					'Howdy! Ready to watch <https://www.youtube.com/user/Startupfood|Startupfood>! :tada:',
 					{
 						username: Meteor.settings.public.botName,
 						as_user: false,
