@@ -20,20 +20,20 @@ Slack.sendToTeams = function(video) {
 						{
 							"fallback": "New TheFamily video online - "+ video.title,
 							"title": "TheFamily, here and there on Slack and Youtube sharing the startup mindset! :star2:",
-							"title_link": "https://www.youtube.com/user/Startupfood",
+							"title_link": "http://startupfood.meteor.com/channel?source=title_link",
 							// push any special content there
 							"text": "TheFamily nurtures entrepreneurs with education, unfair advantages and capital.\nTheFamily believes that Europe can create tons of crazy startups, through education.\n150k views per month on Youtube is a good sign - ambitious local entrepreneurs are ready to fly!",
-							"image_url": "https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xft1/v/t1.0-9/12540780_824204587688796_947625407470548770_n.png?oh=3912c5df2e549ffe8ef88152fa6fb362&oe=5730A458&__gda__=1463048062_1c5353aae9bf7b0ba39aedc49099a540",
+							"thumb_url": "https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xft1/v/t1.0-9/12540780_824204587688796_947625407470548770_n.png?oh=3912c5df2e549ffe8ef88152fa6fb362&oe=5730A458&__gda__=1463048062_1c5353aae9bf7b0ba39aedc49099a540",
 							// you can specify as much as you want attachments
 							"fields": [
 								{
 									"title": "Want to watch more videos from us? :tv:",
-									"value": "<https://www.youtube.com/user/Startupfood|Check out our channel> :tv:",
+									"value": "<http://startupfood.meteor.com/channel?source=watch_more|Check out our channel> :tv:",
 									"short": true
 								},
 								{
-									"title": "Give feedback! :hatched_chick:",
-									"value": "<https://twitter.com/intent/tweet?text=Hey%20%40xavizalote%21%20My%20feedback%20on%20your%20%40_TheFamily%20integration%3A%20&source=webclient|Tweet it>",
+									"title": "Any request? :hatched_chick:",
+									"value": "<https://twitter.com/intent/tweet?text=Hey%20%40xavizalote%21%20My%20feedback%20on%20your%20%40_TheFamily%20integration%3A%20&source=webclient|Give feedback>",
 									"short": true
 								}
 							],
