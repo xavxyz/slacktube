@@ -16,7 +16,6 @@ Meteor.methods({
 				Slack.sendToTeams({
 					title: lastVideoUploaded.title,
 					youtubeId: lastVideoUploaded.youtubeId,
-//					totalVideosResults: totalVideosResults,
 					description: lastVideoUploaded.description
 				});
 			} else {

@@ -45,6 +45,7 @@ Youtube.refactorVideosData = (videoFromYoutube) => {
 		title: videoFromYoutube.title,
 		publishedAt: Date.parse(videoFromYoutube.publishedAt),
 		description: videoFromYoutube.description,
+		thumbnail: videoFromYoutube.thumbnails.default.url,
 		youtubeId: _getVideoIdFromThumbnails(videoFromYoutube.thumbnails.default.url)
 	};
 };
