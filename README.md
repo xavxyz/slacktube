@@ -30,7 +30,6 @@ You may read the [Slack attachments doc](https://api.slack.com/docs/attachments)
 
 # Where to lead this app next
 * Check whether the app is connected to a channel or an user. If it's an user, use Slack's API method to post in user (for ex: slackbot)
-* Add metrics tracking to the links by passing through the app and then redirect to Youtube or wherever you need to lead the user.
 * Add search slash command/slackbot to search directly in your Youtube channel or in TheFamily TV directory (tv.thefamily.co).
 * Push other content than videos if the user really use this app.
 
