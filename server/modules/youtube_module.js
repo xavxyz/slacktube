@@ -40,6 +40,12 @@ Youtube.insertNewVideo = (video) => {
 	console.log(`new video ${video.title} inserted !`);
 };
 
+const _getVideoIdFromThumbnails = (url) => {
+	let splittedUrl =  url.split("/"); // url thumbnail is always like "https://i.ytimg.com/vi/{VIDEO_ID}/default.jpg"
+
+	return splittedUrl[4];
+};
+
 Youtube.refactorVideosData = (videoFromYoutube) => {
 	return {
 		title: videoFromYoutube.title,
@@ -48,10 +54,4 @@ Youtube.refactorVideosData = (videoFromYoutube) => {
 		thumbnail: videoFromYoutube.thumbnails.default.url,
 		youtubeId: _getVideoIdFromThumbnails(videoFromYoutube.thumbnails.default.url)
 	};
-};
-
-const _getVideoIdFromThumbnails = (url) => {
-	let splittedUrl =  url.split("/"); // url thumbnail is always like "https://i.ytimg.com/vi/{VIDEO_ID}/default.jpg"
-
-	return splittedUrl[4];
 };

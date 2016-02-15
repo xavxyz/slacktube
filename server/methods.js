@@ -13,11 +13,7 @@ Meteor.methods({
 				Youtube.insertNewVideo(lastVideoUploaded);
 
 				// send to each team connected the new video
-				Slack.sendToTeams({
-					title: lastVideoUploaded.title,
-					youtubeId: lastVideoUploaded.youtubeId,
-					description: lastVideoUploaded.description
-				});
+				Slack.sendToTeams(lastVideoUploaded);
 			} else {
 				console.log('no new video uploaded yet!');
 			}
@@ -25,13 +21,10 @@ Meteor.methods({
 	},
 	requestSlackToken: function(code) {
 		try {
-			let syncSlackOAuth = Meteor.wrapAsync(SlackAPI.oauth.access),
-				syncSlackPostMessage = Meteor.wrapAsync(SlackAPI.chat.postMessage);
-
-			let credentials = syncSlackOAuth(Meteor.settings.public.clientId, Meteor.settings.private.clientSecret, code, '');
+			let credentials = SlackAPI.oauth.access(Meteor.settings.public.clientId, Meteor.settings.private.clientSecret, code, '');
 
 			try {
-				let message = syncSlackPostMessage(
+				let message = SlackAPI.chat.postMessage(
 					credentials.access_token,
 					credentials.incoming_webhook.channel,
 					'Howdy! Ready to watch <https://www.youtube.com/user/Startupfood|Startupfood>! :tada:',

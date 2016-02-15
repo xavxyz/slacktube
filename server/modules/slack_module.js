@@ -2,13 +2,12 @@ Slack = {};
 
 Slack.sendToTeams = function(video) {
 
-	let teams = Slackteams.find({}).fetch(),
-			syncSlackPostMessage = Meteor.wrapAsync(SlackAPI.chat.postMessage);
+	let teams = Slackteams.find({}).fetch();
 
 	_.each(teams, function(team) {
 		console.log('posting to channel '+ team.channel);
 		try {
-			let result = syncSlackPostMessage(
+			let result = SlackAPI.chat.postMessage(
 				team.accessToken,
 				team.channel,
 				":heart: Direct YouTube link to our newest video: <http://startupfood.meteor.com/video/"+ video.youtubeId +"|https://www.youtube.com/watch?v="+ video.youtubeId +"> :rocket:",
