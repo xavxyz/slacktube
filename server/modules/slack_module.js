@@ -2,16 +2,15 @@ Slack = {};
 
 Slack.sendToTeams = function(video) {
 
-	let teams = Slackteams.find({}).fetch(),
-			syncSlackPostMessage = Meteor.wrapAsync(SlackAPI.chat.postMessage);
+	let teams = Slackteams.find({}).fetch();
 
 	_.each(teams, function(team) {
 		console.log('posting to channel '+ team.channel);
 		try {
-			let result = syncSlackPostMessage(
+			let result = SlackAPI.chat.postMessage(
 				team.accessToken,
 				team.channel,
-				":heart: Direct YouTube link to our newest video: https://www.youtube.com/watch?v="+ video.youtubeId+" :rocket:",
+				":heart: Direct YouTube link to our newest video: <http://startupfood.meteor.com/video/"+ video.youtubeId +"|https://www.youtube.com/watch?v="+ video.youtubeId +"> :rocket:",
 				{
 					username: Meteor.settings.public.botName,
 					as_user: false,
@@ -19,11 +18,11 @@ Slack.sendToTeams = function(video) {
 					attachments: [
 						{
 							"fallback": "New TheFamily video online - "+ video.title,
-							"title": "TheFamily, here and there on Slack and Youtube sharing the startup mindset! :star2:",
-							"title_link": "http://startupfood.meteor.com/channel?source=title_link",
+							"title": ":tv: New TheFamily video online - "+ video.title +" :star2:" ,
+							"title_link": "http://startupfood.meteor.com/video/"+ video.youtubeId,
 							// push any special content there
-							"text": "TheFamily nurtures entrepreneurs with education, unfair advantages and capital.\nTheFamily believes that Europe can create tons of crazy startups, through education.\n150k views per month on Youtube is a good sign - ambitious local entrepreneurs are ready to fly!",
-							"thumb_url": "https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xft1/v/t1.0-9/12540780_824204587688796_947625407470548770_n.png?oh=3912c5df2e549ffe8ef88152fa6fb362&oe=5730A458&__gda__=1463048062_1c5353aae9bf7b0ba39aedc49099a540",
+							"text": video.description + "\n\nTheFamily nurtures entrepreneurs with education, unfair advantages and capital.\nTheFamily believes that Europe can create tons of crazy startups, through education.\n150k views per month on Youtube is a good sign - ambitious local entrepreneurs are ready to fly!",
+							"thumb_url": video.thumbnail,
 							// you can specify as much as you want attachments
 							"fields": [
 								{
@@ -33,7 +32,7 @@ Slack.sendToTeams = function(video) {
 								},
 								{
 									"title": "Any request? :hatched_chick:",
-									"value": "<https://twitter.com/intent/tweet?text=Hey%20%40xavizalote%21%20My%20feedback%20on%20your%20%40_TheFamily%20integration%3A%20&source=webclient|Give feedback>",
+									"value": "<https://twitter.com/intent/tweet?text=.%20%40xavizalote%20%40_TheFamily%20My%20feedback%20about%20your%20integration%3A%20&source=webclient|Feedback welcomed!>",
 									"short": true
 								}
 							],
@@ -41,7 +40,7 @@ Slack.sendToTeams = function(video) {
 						}
 					],
 					unfurl_text: false,
-					unfurl_media: true, // allow the the embed video to be shown (cf. direct link to youtube video)
+					unfurl_media: false, // allow the the embed video to be shown (cf. direct link to youtube video)
 					icon_url: Meteor.settings.public.botIcon
 				}
 			);
