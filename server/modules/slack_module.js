@@ -10,7 +10,7 @@ Slack.sendToTeams = function(video) {
 			let result = SlackAPI.chat.postMessage(
 				team.accessToken,
 				team.channel,
-				":heart: Direct YouTube link to our newest video: <http://startupfood.meteor.com/video/"+ video.youtubeId +"|https://www.youtube.com/watch?v="+ video.youtubeId +"> :rocket:",
+				":heart: Direct YouTube link to TheFamily's newest video: <http://startupfood.meteor.com/video/"+ video.youtubeId +"|https://www.youtube.com/watch?v="+ video.youtubeId +"> :rocket:",
 				{
 					username: Meteor.settings.public.botName,
 					as_user: false,
@@ -18,7 +18,7 @@ Slack.sendToTeams = function(video) {
 					attachments: [
 						{
 							"fallback": "New TheFamily video online - "+ video.title,
-							"title": ":tv: New TheFamily video online - "+ video.title +" :star2:" ,
+							"title": ":nerd_face: New video online - "+ video.title +" :scream_cat:" ,
 							"title_link": "http://startupfood.meteor.com/video/"+ video.youtubeId,
 							// push any special content there
 							"text": video.description + "\n\nTheFamily nurtures entrepreneurs with education, unfair advantages and capital.\nTheFamily believes that Europe can create tons of crazy startups, through education.\n150k views per month on Youtube is a good sign - ambitious local entrepreneurs are ready to fly!",
@@ -26,13 +26,13 @@ Slack.sendToTeams = function(video) {
 							// you can specify as much as you want attachments
 							"fields": [
 								{
-									"title": "Want to watch more videos from us? :tv:",
-									"value": "<http://startupfood.meteor.com/channel?source=watch_more|Check out our channel> :tv:",
+									"title": "Want to watch more videos from TheFamily? :movie_camera:",
+									"value": ":tv: <http://startupfood.meteor.com/channel?source=watch_more|Check out their YouTube channel> :tv:",
 									"short": true
 								},
 								{
-									"title": "Any request? :hatched_chick:",
-									"value": "<https://twitter.com/intent/tweet?text=.%20%40xavizalote%20%40_TheFamily%20My%20feedback%20about%20your%20integration%3A%20&source=webclient|Feedback welcomed!>",
+									"title": ":slack: This bot is brought to you by",
+									"value": "<http://startupfrance.co|Startup France Community>",
 									"short": true
 								}
 							],
