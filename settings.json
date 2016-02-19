@@ -2,7 +2,13 @@
   "public": {
     "clientId": "YOUR_SLACK_APP_CLIENT_ID",
     "botName": "YOUR_BOT_NAME",
-    "botIcon": "YOUR_BOT_ICON"
+    "botIcon": "YOUR_BOT_ICON",
+    "analyticsSettings": {
+      "Mixpanel": {
+        "token":  "YOUR_MIXPANEL_TOKEN",
+        "people": false
+      }
+    }
   },
   "private": {
     "clientSecret": "YOUR_SLACK_APP_CLIENT_SECRET",

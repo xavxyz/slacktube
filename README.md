@@ -7,13 +7,20 @@ Connect TheFamily's Youtube channel to Slack teams via the Add To Slack button o
 1. Clone the repo
 2. Create a [Slack App](https://api.slack.com/applications/new): the redirection URI must be set where your app is deployed (ie. http://startupfood.meteor.com)
 3. Get a [Youtube Api Key](https://developers.google.com/youtube/v3/getting-started)
-4. Edit `settings.json` with your own credentials :
+4. If you want to track clicks, get your Mixpanel token.
+5. Edit `settings.json` with your own credentials :
 ```
 {
   "public": {
     "clientId": "YOUR_SLACK_APP_CLIENT_ID",
     "botName": "YOUR_BOT_NAME",
-    "botIcon": "YOUR_BOT_ICON"
+    "botIcon": "YOUR_BOT_ICON",
+    "analyticsSettings": {
+      "Mixpanel": {
+        "token":  "YOUR_MIXPANEL_TOKEN",
+        "people": false
+      }
+    }
   },
   "private": {
     "clientSecret": "YOUR_SLACK_APP_CLIENT_SECRET",
