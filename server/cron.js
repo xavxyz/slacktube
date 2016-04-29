@@ -5,16 +5,14 @@ SyncedCron.options = {
 	collectionTTL: 172800
 };
 
-var addJob = function () {
+var addJob = () => {
 	SyncedCron.add({
 		name: 'Ping YouTube',
-		schedule: function(parser) {
-			return parser.text('every 5 minutes');
-		},
-		job: 	Meteor.call('pingYoutube')
+		schedule: (parser) => parser.text('every 5 minutes'),
+		job: () => Meteor.call('pingYoutube'),
 	});
 };
 
-Meteor.startup(function () {
+Meteor.startup(() => {
 	addJob();
 });
