@@ -1,8 +1,8 @@
 Template.startupfood.helpers({
-	clientId: function() {
+	clientId() {
 		return Meteor.settings.public.clientId;
 	},
-	redirectUri: function() {
+	redirectUri() {
 		return Meteor.absoluteUrl();
 	}
 });
