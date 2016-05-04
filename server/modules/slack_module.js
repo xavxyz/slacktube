@@ -1,10 +1,10 @@
 Slack = {};
 
-Slack.sendToTeams = function(video) {
+Slack.sendToTeams = (video) => {
 
 	let teams = Slackteams.find({}).fetch();
 
-	_.each(teams, function(team) {
+	_.each(teams, (team) => {
 		console.log('posting to channel '+ team.channel);
 		try {
 			let result = SlackAPI.chat.postMessage(
@@ -46,15 +46,15 @@ Slack.sendToTeams = function(video) {
 			);
 
 			// log content send to the team
-			team.messages.push({
-				videoId: video.youtubeId,
-				ts: result.ts
-			});
+			//team.messages.push({
+			//	videoId: video.youtubeId,
+			//	ts: result.ts
+			//});
 
 			// update the collection
-			Slackteams.update({accessToken: team.accessToken}, {$set: {messages: team.messages}}, function(err, res) {
-				console.log('logged post '+ video.youtubeId +' sent to '+ result.channel +' at '+ result.ts);
-			});
+			//Slackteams.update({accessToken: team.accessToken}, {$set: {messages: team.messages}}, function(err, res) {
+			//	console.log('logged post '+ video.youtubeId +' sent to '+ result.channel +' at '+ result.ts);
+			//});
 
 		} catch(error) {
 			// error handling: somebody has revoked the Startupfood app access to their team
