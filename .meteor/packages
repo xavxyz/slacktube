@@ -28,3 +28,4 @@ okgrow:analytics
 standard-minifier-css
 standard-minifier-js
 percolate:synced-cron
+mquandalle:promisify-core

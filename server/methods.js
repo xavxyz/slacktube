@@ -1,3 +1,5 @@
+import { WebClient } from '@slack/client';
+
 Meteor.methods({
 	pingYoutube() {
 		// do all stuff
@@ -17,13 +19,20 @@ Meteor.methods({
 			console.log('no new video uploaded yet!');
 		}
 	},
-	requestSlackToken(code) {
+	requestSlackToken: async (code) => {
 		try {
-			const credentials = SlackAPI.oauth.access(Meteor.settings.public.clientId, Meteor.settings.private.clientSecret, code, Meteor.absoluteUrl());
+			// webclient without token
+			const client = new WebClient();
+			// get credentials
+			const credentials = await client.oauth.access(Meteor.settings.public.clientId, Meteor.settings.private.clientSecret, code);
 
-			const message = SlackAPI.chat.postMessage(
-				credentials.access_token,
+			// auth a new client with the access token
+			const authClient = new WebClient(credentials.access_token);
+
+			// send a welcome message
+			authClient.chat.postMessage(
 				credentials.incoming_webhook.channel,
+				//'WAYAYAYAYA! I\'m connected using NPM Modules + Promises + Async/Await Meteor Methods <3 ',
 				'Howdy! Ready to watch Startupfood! :tada:',
 				{
 					username: Meteor.settings.public.botName,
@@ -32,16 +41,15 @@ Meteor.methods({
 				}
 			);
 
+			// store the credentials
 			Slackteams.insert({
 				accessToken: credentials.access_token,
 				createdAt: Date.now(),
 				teamName: credentials.team_name,
 				channel: credentials.incoming_webhook.channel
 			});
-
-			console.log('Startupfood connected successfully');
-		} catch(error) {
-			console.log('error', error);
+		} catch(e) {
+			console.log('something weird has happened', e);
 		}
 	},
 	getVideos() {

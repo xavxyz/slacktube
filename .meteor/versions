@@ -55,6 +55,7 @@ modules-runtime@0.6.3
 momentjs:moment@2.13.1
 mongo@1.1.7
 mongo-id@1.0.4
+mquandalle:promisify-core@0.1.0
 npm-mongo@1.4.43
 observe-sequence@1.0.11
 okgrow:analytics@1.0.5
