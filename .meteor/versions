@@ -22,7 +22,6 @@ ddp-client@1.2.7
 ddp-common@1.2.5
 ddp-server@1.2.6
 deps@1.0.12
-didericis:callpromise-mixin@0.0.1
 diff-sequence@1.0.5
 ecmascript@0.4.3
 ecmascript-runtime@0.2.10
@@ -40,7 +39,6 @@ id-map@1.0.7
 jquery@1.11.8
 kadira:blaze-layout@2.3.0
 kadira:flow-router@2.12.1
-lacosta:method-hooks@1.5.3
 launch-screen@1.0.11
 livedata@1.0.18
 logging@1.0.12

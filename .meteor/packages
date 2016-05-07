@@ -30,5 +30,3 @@ standard-minifier-js
 percolate:synced-cron
 mquandalle:promisify-core
 mdg:validated-method
-didericis:callpromise-mixin
-lacosta:method-hooks
