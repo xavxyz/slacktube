@@ -9,11 +9,11 @@ export class Jumbotron extends React.Component {
     this.state = { disclaimer: 'CTA', result: false };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { code } = this.props;
 
     if (code) {
-      const request = async () => {
+      return (async () => {
         try {
           this.setState({ disclaimer: 'Loading...' });
           const result = await Meteor.call('Slack.methods.requestSlackToken', { code });
@@ -21,9 +21,7 @@ export class Jumbotron extends React.Component {
         } catch(e) {
           this.setState({ disclaimer: 'ERR' });
         }
-      };
-
-      return request();
+      })();
     }
   }
 
@@ -36,4 +34,4 @@ export class Jumbotron extends React.Component {
       </div>
     );
   }
-};
+}

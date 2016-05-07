@@ -1,6 +1,8 @@
 import React from 'react';
 import { mount } from 'react-mounter';
 
+import { FlowRouter } from 'meteor/kadira:flow-router-ssr'
+
 import Layout from '/lib/layouts/Layout.jsx';
 import { Jumbotron } from '/lib/components/Jumbotron.jsx';
 
