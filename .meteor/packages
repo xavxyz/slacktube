@@ -18,7 +18,7 @@ http
 underscore
 meteor
 random
-kadira:flow-router
+kadira:flow-router-ssr
 twbs:bootstrap
 momentjs:moment
 aldeed:collection2

@@ -9,3 +9,8 @@ body {
     margin-right: 15%;
     background-color: rgba(16, 16, 42, 1);
 }
+
+.add-to-slack-button {
+    width: 139px;
+    height: 40px;
+}
