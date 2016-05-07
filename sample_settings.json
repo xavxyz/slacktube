@@ -8,7 +8,8 @@
         "token":  "YOUR_MIXPANEL_TOKEN",
         "people": false
       }
-    }
+    },
+    "youtubeChannel": "CHANNEL_ID_YOU_WANT_TO_WATCH"
   },
   "private": {
     "clientSecret": "YOUR_SLACK_APP_CLIENT_SECRET",

@@ -9,7 +9,7 @@ SyncedCron.options = {
 
 SyncedCron.add({
 	name: 'Ping YouTube and distribute to Slack if a new video has been uploaded',
-	schedule: (parser) => parser.text('every 2 seconds'),
+	schedule: (parser) => parser.text('every 5 minutes'),
 	job: async () => {
 		try {
 

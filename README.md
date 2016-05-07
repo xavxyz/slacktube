@@ -8,7 +8,7 @@ Connect TheFamily's Youtube channel to Slack teams via the Add To Slack button o
 2. Create a [Slack App](https://api.slack.com/applications/new): the redirection URI must be set where your app is deployed (ie. http://startupfood.meteor.com)
 3. Get a [Youtube Api Key](https://developers.google.com/youtube/v3/getting-started)
 4. If you want to track clicks, get your Mixpanel token.
-5. Edit `settings.json` with your own credentials :
+5. Create your `settings.json` from `sample_settings.json` with your own credentials :
 ```
 {
   "public": {
@@ -20,13 +20,16 @@ Connect TheFamily's Youtube channel to Slack teams via the Add To Slack button o
         "token":  "YOUR_MIXPANEL_TOKEN",
         "people": false
       }
-    }
+    },
+    "youtubeChannel": "CHANNEL_ID_YOU_WANT_TO_WATCH"
   },
   "private": {
     "clientSecret": "YOUR_SLACK_APP_CLIENT_SECRET",
     "googleApiKey": "YOUR_GOOGLE_API_KEY"
   }
 }
+6. Install npm packages `meteor npm install`
+7. Start the app with `meteor --settings settings.json`
 ```
 
 That's all, deploy your app & you are ready to push contents to any teams connected to your app.
