@@ -1,27 +1,29 @@
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-Slack = new Mongo.Collection("slack");
+const Slack = new Mongo.Collection("slack");
 
 Slack.deny({
   insert() { return true; },
   update() { return true; },
-  remove() { return true; }
+  remove() { return true; },
 });
 
-let slackSchema = new SimpleSchema({
+const slackSchema = new SimpleSchema({
   accessToken: {
-    type: String
+    type: String,
   },
   createdAt: {
-    type: Date
+    type: Date,
   },
   teamName: {
-    type: String
+    type: String,
   },
   channel: {
-    type: String
-  }
+    type: String,
+  },
 });
 
 Slack.attachSchema(slackSchema);
+
+export { Slack, slackSchema };

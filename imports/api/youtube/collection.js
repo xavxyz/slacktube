@@ -1,4 +1,7 @@
-Youtube = new Mongo.Collection("youtube");
+import { Mongo } from 'meteor/mongo';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
+const Youtube = new Mongo.Collection("youtube");
 
 Youtube.deny({
 	insert() { return true; },
@@ -14,16 +17,16 @@ const youtubeSchema = new SimpleSchema({
 		type: String,
 	},
 	publishedAt: {
-		type: Number,
+		type: Date,
 	},
 	youtubeId: {
 		type: String,
 	},
 	thumbnail: {
 		type: String,
-	}
+	},
 });
 
 Youtube.attachSchema(youtubeSchema);
 
-export { youtubeSchema };
+export { Youtube, youtubeSchema };

@@ -1,4 +1,8 @@
-import { cleanVideo } from '/lib/youtube/helpers';
+import { Meteor } from 'meteor/meteor';
+import { SyncedCron } from 'meteor/percolate:synced-cron';
+
+import { Slack } from './slack/collection';
+import { cleanVideo } from './youtube/helpers';
 
 SyncedCron.options = {
 	log: false,
@@ -40,9 +44,9 @@ SyncedCron.add({
 				if (!!newVideoRegistered) {
 					console.log('// Starting distribution to Slack teams');
 					// send to each team connected the new video
-					Slack.find({}).forEach(async(team) => {
+					Slack.find({}, { fields: { accessToken: 1, channel: 1 } }).forEach(async(team) => {
 						try {
-							// spread! ... \ô/ ... \ô> ... \o/^ ... \o/  ^ (someone taking out their hat and throwing it)
+							// spread! ... \ô/ ... \ô> ... \o/^ ... \o/  ^ (someone taking out their hat and throwing it away)
 							await Meteor.call('Slack.methods.distributeVideo', {
 								...video,
 								...team

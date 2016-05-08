@@ -22,7 +22,6 @@ kadira:flow-router-ssr
 twbs:bootstrap
 momentjs:moment
 aldeed:collection2
-themeteorchef:bert
 kadira:blaze-layout
 okgrow:analytics
 standard-minifier-css

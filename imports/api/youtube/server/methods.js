@@ -1,4 +1,4 @@
-import { youtubeSchema } from '../collection';
+import { Youtube, youtubeSchema } from '../collection';
 
 const check = new ValidatedMethod({
 	name: 'Youtube.methods.check',

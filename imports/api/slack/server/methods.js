@@ -1,6 +1,9 @@
 import { WebClient } from '@slack/client';
+import { Meteor } from 'meteor/meteor';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
+import { Slack } from '../collection';
 
 const requestSlackToken = new ValidatedMethod({
   name: 'Slack.methods.requestSlackToken',
@@ -13,28 +16,35 @@ const requestSlackToken = new ValidatedMethod({
       // get credentials
       const credentials = await client.oauth.access(Meteor.settings.public.clientId, Meteor.settings.private.clientSecret, code);
 
-      // auth a new client with the access token
-      const authClient = new WebClient(credentials.access_token);
+      // if there is not an integration registered for this team and this channel -> todo: tweak this to accept multiple youtube channels
+      if (!Slack.findOne({ teamName: credentials.team_name, channel: credentials.incoming_webhook.channel })) {
 
-      // send a welcome message
-      authClient.chat.postMessage(
-        credentials.incoming_webhook.channel,
-        //'WOYOYOYOYO! I\'m connected using NPM Modules + Promises + Async/Await Meteor *Validated* Methods <3 ',
-        'Howdy! Ready to watch Youtube! :movie_camera:',
-        {
-          username: Meteor.settings.public.botName,
-          as_user: false,
-          icon_url: Meteor.settings.public.botIcon
-        }
-      );
+        // auth a new client with the access token
+        const authClient = new WebClient(credentials.access_token);
 
-      // store the credentials
-      return Slack.insert({
-        accessToken: credentials.access_token,
-        createdAt: Date.now(),
-        teamName: credentials.team_name,
-        channel: credentials.incoming_webhook.channel
-      });
+        // send a welcome message
+        authClient.chat.postMessage(
+          credentials.incoming_webhook.channel,
+          //'WOYOYOYOYO! I\'m connected using NPM Modules + Promises + Async/Await Meteor *Validated* Methods <3 ',
+          'Howdy! Ready to watch Youtube! :movie_camera:',
+          {
+            username: Meteor.settings.public.botName,
+            as_user: false,
+            icon_url: Meteor.settings.public.botIcon
+          }
+        );
+
+        // store the credentials
+        return Slack.insert({
+          accessToken: credentials.access_token,
+          createdAt: Date.now(),
+          teamName: credentials.team_name,
+          channel: credentials.incoming_webhook.channel
+        });
+      } else {
+        console.log('team already exists!');
+        return false;
+      }
     } catch(e) {
       console.log('something weird has happened', e);
       return false;
@@ -46,12 +56,15 @@ const distributeVideo = new ValidatedMethod({
   name: 'Slack.methods.distributeVideo',
   validate: new SimpleSchema({
     title: { type: String },
+    description: { type: String },
+    publishedAt: { type: Date },
     youtubeId: { type: String },
     thumbnail: { type: String },
+    _id: { type: String },
     accessToken: { type: String },
     channel: { type: String },
   }).validator(),
-  run: async ({ title, youtubeId, thumbnail, accessToken, channel }) => {
+  run: async ({ title, description, publishedAt, youtubeId, thumbnail, _id, accessToken, channel }) => {
     
     console.log('posting to channel '+ channel);
     

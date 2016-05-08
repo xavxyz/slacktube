@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 // clean video data from youtube
 const cleanVideo = ({ title, publishedAt, description, thumbnails }) => {
 
@@ -12,7 +14,7 @@ const cleanVideo = ({ title, publishedAt, description, thumbnails }) => {
 
   return {
     title,
-    publishedAt: Date.parse(publishedAt),
+    publishedAt: moment(publishedAt).toDate(),
     description,
     thumbnail,
     youtubeId,
