@@ -14,12 +14,15 @@
     "utf-8-validate": "^1.2.1"
   },
   "devDependencies": {
+    "@kadira/storybook": "^1.25.0",
     "eslint": "^2.9.0",
     "eslint-config-airbnb": "^9.0.0",
     "eslint-plugin-import": "^1.7.0",
     "eslint-plugin-jsx-a11y": "^1.2.0",
     "eslint-plugin-meteor": "^3.5.2",
-    "eslint-plugin-react": "^5.0.1"
+    "eslint-plugin-react": "^5.0.1",
+    "raw-loader": "^0.5.1",
+    "style-loader": "^0.13.1"
   },
   "repository": {
     "type": "git",
@@ -32,7 +35,8 @@
   ],
   "scripts": {
     "lint": "eslint .",
-    "pretest": "npm run lint --silent"
+    "pretest": "npm run lint --silent",
+    "storybook": "start-storybook -p 9001"
   },
   "eslintConfig": {
     "plugins": [
