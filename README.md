@@ -28,7 +28,7 @@ Connect TheFamily's Youtube channel to Slack teams via the Add To Slack button o
     "googleApiKey": "YOUR_GOOGLE_API_KEY"
   }
 }
-6. Install npm packages `meteor npm install`
+6. Install npm packages `npm install`
 7. Start the app with `meteor --settings settings.json`
 ```
 
@@ -37,6 +37,10 @@ That's all, deploy your app & you are ready to push contents to any teams connec
 # Basic enhancements
 You can customize the attachments in `/server/lib/slack_module.js`.
 You may read the [Slack attachments doc](https://api.slack.com/docs/attachments) to better understand how to deal with it.
+
+# React Storybook
+This app uses [React Storybook](https://github.com/kadirahq/react-storybook). To use it, type `npm run storybook`.
+Make sure to upgrade to npm@3.x.x to use it.
 
 # Where to lead this app next
 * Check whether the app is connected to a channel or an user. If it's an user, use Slack's API method to post in user (for ex: slackbot)
