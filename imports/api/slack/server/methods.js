@@ -87,13 +87,13 @@ const distributeVideo = new ValidatedMethod({
               title_link: 'http://hacklearnmake.com', // no host by now
               // push any special content there
               text: ':scream_cat:\nNew video online, check it out!',
-              thumbnail_url: thumbnail,
+              image_url: thumbnail,
               // you can specify as much as you want attachments
               fields: [
                 {
-                  title: ':squirrel: This bot is brought to you by',
-                  value: '<http://hacklearnmake.com|{ Hack, Learn } = Make>',
-                  short: true
+                  title: ':squirrel:',
+                  value: 'This bot is brought to you by <http://hacklearnmake.com|{ Hack, Learn } = Make>',
+                  short: false
                 }
               ],
               color: '#10102A'
