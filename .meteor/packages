@@ -22,8 +22,6 @@ kadira:flow-router-ssr
 twbs:bootstrap
 momentjs:moment
 aldeed:collection2
-kadira:blaze-layout
-okgrow:analytics
 standard-minifier-css
 standard-minifier-js
 percolate:synced-cron
