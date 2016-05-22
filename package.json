@@ -1,10 +1,9 @@
 {
   "name": "startupfood-slack",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Connect startupfood to slack",
   "author": "xavcz",
   "dependencies": {
-    "@kadira/storybook": "^1.26.0",
     "@slack/client": "^3.1.0",
     "meteor-node-stubs": "^0.2.3",
     "moment": "^2.13.0",
